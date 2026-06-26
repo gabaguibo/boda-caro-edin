@@ -1,140 +1,132 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { SITE } from '../config'
 
-const SECTION_LABELS = {
-  ayuntamiento: 'Ceremonia en el Ayuntamiento',
-  banquete: 'Banquete',
-  videos: 'Vídeos',
-}
+export default function Gallery({ media, featuredSlides }) {
+  const photos = useMemo(() => media.filter((item) => item.type === 'photo'), [media])
+  const slides = featuredSlides?.length ? featuredSlides : photos.slice(0, 3).map((item) => ({
+    id: item.id,
+    images: [item.src],
+  }))
 
-export default function Gallery({ media, downloadAllUrl }) {
-  const [currentIndex, setCurrentIndex] = useState(null)
+  const [slideIndex, setSlideIndex] = useState(0)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
 
-  const slideshowItems = useMemo(() => media, [media])
-  const currentItem = currentIndex === null ? null : slideshowItems[currentIndex]
+  const currentSlide = slides[slideIndex]
+  const currentPhoto = lightboxIndex === null ? null : photos[lightboxIndex]
 
-  function openSlideshow(index) {
-    setCurrentIndex(index)
+  function nextSlide() {
+    setSlideIndex((value) => (value + 1) % slides.length)
+  }
+
+  function prevSlide() {
+    setSlideIndex((value) => (value - 1 + slides.length) % slides.length)
+  }
+
+  function openLightbox(index) {
+    setLightboxIndex(index)
     document.documentElement.classList.add('noScroll')
   }
 
-  function closeSlideshow() {
-    setCurrentIndex(null)
+  function closeLightbox() {
+    setLightboxIndex(null)
     document.documentElement.classList.remove('noScroll')
   }
 
-  function goNext() {
-    setCurrentIndex((value) => (value + 1) % slideshowItems.length)
+  function nextPhoto() {
+    setLightboxIndex((value) => (value + 1) % photos.length)
   }
 
-  function goPrev() {
-    setCurrentIndex((value) => (value - 1 + slideshowItems.length) % slideshowItems.length)
+  function prevPhoto() {
+    setLightboxIndex((value) => (value - 1 + photos.length) % photos.length)
   }
 
   useEffect(() => {
     function onKeyDown(event) {
-      if (currentIndex === null) return
-      if (event.key === 'Escape') closeSlideshow()
-      if (event.key === 'ArrowRight') goNext()
-      if (event.key === 'ArrowLeft') goPrev()
+      if (lightboxIndex === null) return
+
+      if (event.key === 'Escape') closeLightbox()
+      if (event.key === 'ArrowRight') nextPhoto()
+      if (event.key === 'ArrowLeft') prevPhoto()
     }
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [currentIndex])
-
-  useEffect(() => {
-    function openFromHash() {
-      if (window.location.hash === '#slideshow' && slideshowItems.length > 0) {
-        openSlideshow(0)
-        history.replaceState(null, '', window.location.pathname)
-      }
-    }
-
-    openFromHash()
-    window.addEventListener('hashchange', openFromHash)
-    return () => window.removeEventListener('hashchange', openFromHash)
-  }, [slideshowItems.length])
-
-  const ayuntamiento = media.filter((item) => item.section === 'ayuntamiento')
-  const banquete = media.filter((item) => item.section === 'banquete')
-  const videos = media.filter((item) => item.section === 'videos')
+  }, [lightboxIndex, photos.length])
 
   return (
     <>
-      <section className="intro">
-        <p>
-          Galería privada de la boda. Puedes ver las fotografías en pantalla,
-          abrir el slideshow o descargar el archivo completo.
-        </p>
-        <a href={downloadAllUrl} className="button buttonDark" target="_blank" rel="noreferrer">
-          Descargar todas las fotos y vídeos
-        </a>
-      </section>
+      <section className="featuredSection" id="fotografias" aria-label="Fotografías destacadas">
+        <div className="featuredShell">
+          <button className="featuredArrow featuredPrev" onClick={prevSlide} aria-label="Slide anterior">‹</button>
 
-      <MediaSection id="ayuntamiento" title={SECTION_LABELS.ayuntamiento} items={ayuntamiento} allItems={media} onOpen={openSlideshow} />
-      <MediaSection id="banquete" title={SECTION_LABELS.banquete} items={banquete} allItems={media} onOpen={openSlideshow} />
-      {videos.length > 0 && <MediaSection id="videos" title={SECTION_LABELS.videos} items={videos} allItems={media} onOpen={openSlideshow} />}
-
-      {currentItem && (
-        <div className="slideshow" role="dialog" aria-modal="true" aria-label="Slideshow">
-          <button className="slideClose" onClick={closeSlideshow} aria-label="Cerrar">×</button>
-          <button className="slideArrow slidePrev" onClick={goPrev} aria-label="Anterior">‹</button>
-
-          <div className="slideStage">
-            {currentItem.type === 'video' ? (
-              <video src={currentItem.src} controls autoPlay className="slideMedia" />
-            ) : (
-              <img src={currentItem.src} alt={currentItem.alt} className="slideMedia" />
-            )}
-
-            <div className="slideCaption">
-              <span>{currentIndex + 1} / {slideshowItems.length}</span>
-              <span>{SECTION_LABELS[currentItem.section]}</span>
-              <a href={currentItem.src} download className="slideDownload">Descargar</a>
-            </div>
+          <div
+            className="featuredGrid"
+            data-count={currentSlide.images.length}
+            style={{ gridTemplateColumns: `repeat(${Math.min(currentSlide.images.length, 3)}, minmax(0, 1fr))` }}
+          >
+            {currentSlide.images.slice(0, 3).map((src, index) => (
+              <div className="featuredImageWrap" key={`${currentSlide.id}-${src}`}>
+                <img src={src} alt={`Fotografía destacada ${slideIndex + 1}.${index + 1}`} />
+              </div>
+            ))}
           </div>
 
-          <button className="slideArrow slideNext" onClick={goNext} aria-label="Siguiente">›</button>
+          <button className="featuredArrow featuredNext" onClick={nextSlide} aria-label="Slide siguiente">›</button>
+
+          <div className="featuredCounter">
+            {slideIndex + 1} / {slides.length}
+          </div>
         </div>
-      )}
-    </>
-  )
-}
+      </section>
 
-function MediaSection({ id, title, items, allItems, onOpen }) {
-  if (items.length === 0) return null
-
-  return (
-    <section className="gallerySection" id={id}>
-      <div className="sectionHeader">
-        <h2>{title}</h2>
-        <p>{items.length} archivos</p>
-      </div>
-
-      <div className="masonry">
-        {items.map((item) => {
-          const globalIndex = allItems.findIndex((entry) => entry.id === item.id)
-
-          return (
+      <section className="thumbsSection" id="miniaturas" aria-label="Miniaturas">
+        <div className="masonry">
+          {photos.map((item, index) => (
             <figure className="card" key={item.id}>
-              <button className="mediaButton" onClick={() => onOpen(globalIndex)} aria-label={`Abrir ${item.alt}`}>
-                {item.type === 'video' ? (
-                  <video src={item.src} muted playsInline preload="metadata" className="thumb" />
-                ) : (
-                  <img src={item.src} alt={item.alt} loading="lazy" className="thumb" />
-                )}
-                {item.type === 'video' && <span className="playBadge">Play</span>}
+              <button className="mediaButton" onClick={() => openLightbox(index)} aria-label={`Abrir ${item.alt}`}>
+                <img src={item.src} alt={item.alt} loading="lazy" className="thumb" />
               </button>
               <figcaption>
-                <button onClick={() => onOpen(globalIndex)}>Ver</button>
+                <button onClick={() => openLightbox(index)}>Ver</button>
                 <a href={item.src} download>Descargar</a>
               </figcaption>
             </figure>
-          )
-        })}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+
+      <section className="videosSection" id="videos" aria-label="Vídeos">
+        <div className="videosList">
+          {SITE.videos.map((video) => (
+            <article className="videoCard" key={video.id}>
+              <div className="videoPlaceholder">
+                <span>{video.title}</span>
+              </div>
+              <p>{video.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {currentPhoto && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
+          <button className="lightboxClose" onClick={closeLightbox} aria-label="Cerrar">×</button>
+          <button className="lightboxArrow lightboxPrev" onClick={prevPhoto} aria-label="Anterior">‹</button>
+
+          <div className="lightboxStage">
+            <img src={currentPhoto.src} alt={currentPhoto.alt} className="lightboxMedia" />
+
+            <div className="lightboxCaption">
+              <span>{lightboxIndex + 1} / {photos.length}</span>
+              <a href={currentPhoto.src} download>Descargar foto</a>
+            </div>
+          </div>
+
+          <button className="lightboxArrow lightboxNext" onClick={nextPhoto} aria-label="Siguiente">›</button>
+        </div>
+      )}
+    </>
   )
 }
