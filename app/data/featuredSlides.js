@@ -2,8 +2,8 @@ export const featuredSlides = [
   {
     id: 'slide-1',
     images: [
-      '/media/banquete/banquete-001.png',
-      '/media/banquete/banquete-002.png',
+      '/media/banquete/banquete-001-IA.jpg',
+      '/media/banquete/banquete-002-IA.jpg',
     ],
   },
   {
@@ -15,7 +15,7 @@ export const featuredSlides = [
   {
     id: 'slide-3',
     images: [
-      '/media/ayuntamiento/ayto-003.png',
+      '/media/ayuntamiento/ayto-003.jpg',
       '/media/ayuntamiento/ayto-004.jpg',
     ],
   },
@@ -86,9 +86,9 @@ export const featuredSlides = [
   {
     id: 'slide-13',
     images: [
-      '/media/banquete/banquete-010-IA.png',
-      '/media/banquete/banquete-011-IA.png',
-      '/media/banquete/banquete-012-IA.png',
+      '/media/banquete/banquete-010-IA.jpg',
+      '/media/banquete/banquete-011-IA.jpg',
+      '/media/banquete/banquete-012-IA.jpg',
     ],
   },
   {
@@ -126,7 +126,7 @@ export const featuredSlides = [
   {
     id: 'slide-18',
     images: [
-      '/media/banquete/banquete-026-IA.png',
+      '/media/banquete/banquete-026-IA.jpg',
     ],
   },
   {
@@ -292,7 +292,7 @@ export const bwFeaturedSlides = [
   {
     id: 'bn-slide-1',
     images: [
-      '/media/bn/BN-01.png',
+      '/media/bn/BN-01.jpg',
     ],
   },
   {
