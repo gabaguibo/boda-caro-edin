@@ -3,18 +3,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { SITE } from '../config'
 
-export default function Gallery({ media, featuredSlides }) {
-  const photos = useMemo(() => media.filter((item) => item.type === 'photo'), [media])
-  const slides = featuredSlides?.length ? featuredSlides : photos.slice(0, 3).map((item) => ({
-    id: item.id,
-    images: [item.src],
-  }))
-
+function FeaturedCarousel({ slides, id, ariaLabel, counterPrefix }) {
   const [slideIndex, setSlideIndex] = useState(0)
-  const [lightboxIndex, setLightboxIndex] = useState(null)
+
+  if (!slides?.length) return null
 
   const currentSlide = slides[slideIndex]
-  const currentPhoto = lightboxIndex === null ? null : photos[lightboxIndex]
 
   function nextSlide() {
     setSlideIndex((value) => (value + 1) % slides.length)
@@ -23,6 +17,84 @@ export default function Gallery({ media, featuredSlides }) {
   function prevSlide() {
     setSlideIndex((value) => (value - 1 + slides.length) % slides.length)
   }
+
+  return (
+    <section className="featuredSection" id={id} aria-label={ariaLabel}>
+      <div className="featuredShell">
+        <button
+          className="featuredArrow featuredPrev"
+          onClick={prevSlide}
+          aria-label="Slide anterior"
+          type="button"
+        >
+          ‹
+        </button>
+
+        <div
+          className={`featuredGrid ${currentSlide.layout ? `featuredGrid--${currentSlide.layout}` : ''}`}
+          data-count={currentSlide.images.length}
+        >
+          {currentSlide.images.slice(0, 4).map((src, index) => (
+            <div className="featuredImageWrap" key={`${currentSlide.id}-${src}-${index}`}>
+              <img
+                src={src}
+                alt={`${ariaLabel} ${slideIndex + 1}.${index + 1}`}
+              />
+            </div>
+          ))}
+        </div>
+
+        <button
+          className="featuredArrow featuredNext"
+          onClick={nextSlide}
+          aria-label="Slide siguiente"
+          type="button"
+        >
+          ›
+        </button>
+
+        <div className="featuredCounter">
+          {counterPrefix ? `${counterPrefix} · ` : ''}
+          {slideIndex + 1} / {slides.length}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default function Gallery({ media, featuredSlides, bwFeaturedSlides }) {
+  const photos = useMemo(
+    () => media.filter((item) => item.type === 'photo'),
+    [media]
+  )
+
+  const photosWithIndex = useMemo(
+    () => photos.map((item, index) => ({ ...item, lightboxIndex: index })),
+    [photos]
+  )
+
+  const ayuntamientoPhotos = useMemo(
+    () => photosWithIndex.filter((item) => item.src.includes('/ayuntamiento/')),
+    [photosWithIndex]
+  )
+
+  const banquetePhotos = useMemo(
+    () => photosWithIndex.filter((item) => item.src.includes('/banquete/')),
+    [photosWithIndex]
+  )
+
+  const mainSlides = useMemo(() => {
+    if (featuredSlides?.length) return featuredSlides
+
+    return photos.slice(0, 3).map((item) => ({
+      id: item.id,
+      images: [item.src],
+    }))
+  }, [featuredSlides, photos])
+
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+
+  const currentPhoto = lightboxIndex === null ? null : photos[lightboxIndex]
 
   function openLightbox(index) {
     setLightboxIndex(index)
@@ -55,45 +127,104 @@ export default function Gallery({ media, featuredSlides }) {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [lightboxIndex, photos.length])
 
+  useEffect(() => {
+    return () => {
+      document.documentElement.classList.remove('noScroll')
+    }
+  }, [])
+
   return (
     <>
-      <section className="featuredSection" id="fotografias" aria-label="Fotografías destacadas">
-        <div className="featuredShell">
-          <button className="featuredArrow featuredPrev" onClick={prevSlide} aria-label="Slide anterior">‹</button>
+      <FeaturedCarousel
+        slides={mainSlides}
+        id="fotografias"
+        ariaLabel="Fotografías destacadas"
+      />
 
-          <div
-            className="featuredGrid"
-            data-count={currentSlide.images.length}
-            style={{ gridTemplateColumns: `repeat(${Math.min(currentSlide.images.length, 3)}, minmax(0, 1fr))` }}
-          >
-            {currentSlide.images.slice(0, 3).map((src, index) => (
-              <div className="featuredImageWrap" key={`${currentSlide.id}-${src}`}>
-                <img src={src} alt={`Fotografía destacada ${slideIndex + 1}.${index + 1}`} />
-              </div>
-            ))}
-          </div>
+      {bwFeaturedSlides?.length > 0 && (
+        <>
+          <div className="bwTitle">Blanco y negro</div>
 
-          <button className="featuredArrow featuredNext" onClick={nextSlide} aria-label="Slide siguiente">›</button>
-
-          <div className="featuredCounter">
-            {slideIndex + 1} / {slides.length}
-          </div>
-        </div>
-      </section>
+          <FeaturedCarousel
+            slides={bwFeaturedSlides}
+            id="blanco-negro"
+            ariaLabel="Fotografías en blanco y negro"
+            counterPrefix="B&N"
+          />
+        </>
+      )}
 
       <section className="thumbsSection" id="miniaturas" aria-label="Miniaturas">
-        <div className="masonry">
-          {photos.map((item, index) => (
-            <figure className="card" key={item.id}>
-              <button className="mediaButton" onClick={() => openLightbox(index)} aria-label={`Abrir ${item.alt}`}>
-                <img src={item.src} alt={item.alt} loading="lazy" className="thumb" />
-              </button>
-              <figcaption>
-                <button onClick={() => openLightbox(index)}>Ver</button>
-                <a href={item.src} download>Descargar</a>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="thumbnailGroup">
+          <h2>Ayuntamiento</h2>
+
+          <div className="thumbnailGrid">
+            {ayuntamientoPhotos.map((item) => (
+              <figure className="thumbnailCard" key={item.id}>
+                <button
+                  className="mediaButton"
+                  onClick={() => openLightbox(item.lightboxIndex)}
+                  aria-label={`Abrir ${item.alt}`}
+                  type="button"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="thumb"
+                  />
+                </button>
+
+                <figcaption>
+                  <button
+                    onClick={() => openLightbox(item.lightboxIndex)}
+                    type="button"
+                  >
+                    Ver
+                  </button>
+                  <a href={item.src} download>
+                    Descargar
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <div className="thumbnailGroup">
+          <h2>Banquete</h2>
+
+          <div className="thumbnailGrid">
+            {banquetePhotos.map((item) => (
+              <figure className="thumbnailCard" key={item.id}>
+                <button
+                  className="mediaButton"
+                  onClick={() => openLightbox(item.lightboxIndex)}
+                  aria-label={`Abrir ${item.alt}`}
+                  type="button"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="thumb"
+                  />
+                </button>
+
+                <figcaption>
+                  <button
+                    onClick={() => openLightbox(item.lightboxIndex)}
+                    type="button"
+                  >
+                    Ver
+                  </button>
+                  <a href={item.src} download>
+                    Descargar
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -111,20 +242,53 @@ export default function Gallery({ media, featuredSlides }) {
       </section>
 
       {currentPhoto && (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
-          <button className="lightboxClose" onClick={closeLightbox} aria-label="Cerrar">×</button>
-          <button className="lightboxArrow lightboxPrev" onClick={prevPhoto} aria-label="Anterior">‹</button>
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Fotografía ampliada"
+        >
+          <button
+            className="lightboxClose"
+            onClick={closeLightbox}
+            aria-label="Cerrar"
+            type="button"
+          >
+            ×
+          </button>
+
+          <button
+            className="lightboxArrow lightboxPrev"
+            onClick={prevPhoto}
+            aria-label="Anterior"
+            type="button"
+          >
+            ‹
+          </button>
 
           <div className="lightboxStage">
-            <img src={currentPhoto.src} alt={currentPhoto.alt} className="lightboxMedia" />
+            <img
+              src={currentPhoto.src}
+              alt={currentPhoto.alt}
+              className="lightboxMedia"
+            />
 
             <div className="lightboxCaption">
               <span>{lightboxIndex + 1} / {photos.length}</span>
-              <a href={currentPhoto.src} download>Descargar foto</a>
+              <a href={currentPhoto.src} download>
+                Descargar foto
+              </a>
             </div>
           </div>
 
-          <button className="lightboxArrow lightboxNext" onClick={nextPhoto} aria-label="Siguiente">›</button>
+          <button
+            className="lightboxArrow lightboxNext"
+            onClick={nextPhoto}
+            aria-label="Siguiente"
+            type="button"
+          >
+            ›
+          </button>
         </div>
       )}
     </>
