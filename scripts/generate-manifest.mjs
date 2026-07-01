@@ -20,6 +20,12 @@ const sections = [
     publicPath: '/media/banquete',
   },
   {
+    key: 'bn',
+    label: 'Blanco y negro',
+    folder: path.join(mediaDir, 'BN'),
+    publicPath: '/media/BN',
+  },
+  {
     key: 'videos',
     label: 'Vídeos',
     folder: path.join(mediaDir, 'videos'),
