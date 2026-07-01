@@ -13,119 +13,112 @@ export const media = [
     "id": "ayuntamiento-002",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-002.jpg",
+    "src": "/media/ayuntamiento/ayto-003.jpg",
     "alt": "Ceremonia en el Ayuntamiento 2"
   },
   {
     "id": "ayuntamiento-003",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-003.png",
+    "src": "/media/ayuntamiento/ayto-004.jpg",
     "alt": "Ceremonia en el Ayuntamiento 3"
   },
   {
     "id": "ayuntamiento-004",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-004.jpg",
+    "src": "/media/ayuntamiento/ayto-005.jpg",
     "alt": "Ceremonia en el Ayuntamiento 4"
   },
   {
     "id": "ayuntamiento-005",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-005.jpg",
+    "src": "/media/ayuntamiento/ayto-006.jpg",
     "alt": "Ceremonia en el Ayuntamiento 5"
   },
   {
     "id": "ayuntamiento-006",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-006.jpg",
+    "src": "/media/ayuntamiento/ayto-007.jpg",
     "alt": "Ceremonia en el Ayuntamiento 6"
   },
   {
     "id": "ayuntamiento-007",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-007.jpg",
+    "src": "/media/ayuntamiento/ayto-008.jpg",
     "alt": "Ceremonia en el Ayuntamiento 7"
   },
   {
     "id": "ayuntamiento-008",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-008.jpg",
+    "src": "/media/ayuntamiento/ayto-009.jpg",
     "alt": "Ceremonia en el Ayuntamiento 8"
   },
   {
     "id": "ayuntamiento-009",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-009.jpg",
+    "src": "/media/ayuntamiento/ayto-010.jpg",
     "alt": "Ceremonia en el Ayuntamiento 9"
   },
   {
     "id": "ayuntamiento-010",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-010.jpg",
+    "src": "/media/ayuntamiento/ayto-011.jpg",
     "alt": "Ceremonia en el Ayuntamiento 10"
   },
   {
     "id": "ayuntamiento-011",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-011.jpg",
+    "src": "/media/ayuntamiento/ayto-012.jpg",
     "alt": "Ceremonia en el Ayuntamiento 11"
   },
   {
     "id": "ayuntamiento-012",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-012.jpg",
+    "src": "/media/ayuntamiento/ayto-013.jpg",
     "alt": "Ceremonia en el Ayuntamiento 12"
   },
   {
     "id": "ayuntamiento-013",
     "type": "photo",
     "section": "ayuntamiento",
-    "src": "/media/ayuntamiento/ayto-013.jpg",
-    "alt": "Ceremonia en el Ayuntamiento 13"
-  },
-  {
-    "id": "ayuntamiento-014",
-    "type": "photo",
-    "section": "ayuntamiento",
     "src": "/media/ayuntamiento/ayto-014.jpg",
-    "alt": "Ceremonia en el Ayuntamiento 14"
+    "alt": "Ceremonia en el Ayuntamiento 13"
   },
   {
     "id": "banquete-001",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-001.jpg",
+    "src": "/media/banquete/banquete-001-IA.jpg",
     "alt": "Banquete 1"
   },
   {
     "id": "banquete-002",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-001.png",
+    "src": "/media/banquete/banquete-001.jpg",
     "alt": "Banquete 2"
   },
   {
     "id": "banquete-003",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-002.jpg",
+    "src": "/media/banquete/banquete-002-IA.jpg",
     "alt": "Banquete 3"
   },
   {
     "id": "banquete-004",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-002.png",
+    "src": "/media/banquete/banquete-002.jpg",
     "alt": "Banquete 4"
   },
   {
@@ -181,7 +174,7 @@ export const media = [
     "id": "banquete-012",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-010-IA.png",
+    "src": "/media/banquete/banquete-010-IA.jpg",
     "alt": "Banquete 12"
   },
   {
@@ -195,7 +188,7 @@ export const media = [
     "id": "banquete-014",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-011-IA.png",
+    "src": "/media/banquete/banquete-011-IA.jpg",
     "alt": "Banquete 14"
   },
   {
@@ -209,7 +202,7 @@ export const media = [
     "id": "banquete-016",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-012-IA.png",
+    "src": "/media/banquete/banquete-012-IA.jpg",
     "alt": "Banquete 16"
   },
   {
@@ -321,7 +314,7 @@ export const media = [
     "id": "banquete-032",
     "type": "photo",
     "section": "banquete",
-    "src": "/media/banquete/banquete-026-IA.png",
+    "src": "/media/banquete/banquete-026-IA.jpg",
     "alt": "Banquete 32"
   },
   {

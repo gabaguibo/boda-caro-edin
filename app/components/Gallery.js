@@ -232,9 +232,22 @@ export default function Gallery({ media, featuredSlides, bwFeaturedSlides }) {
         <div className="videosList">
           {SITE.videos.map((video) => (
             <article className="videoCard" key={video.id}>
-              <div className="videoPlaceholder">
-                <span>{video.title}</span>
-              </div>
+              {video.youtubeId ? (
+                <div className="videoEmbed">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                    title={video.description}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <div className="videoPlaceholder">
+                  <span>{video.title}</span>
+                </div>
+              )}
+
               <p>{video.description}</p>
             </article>
           ))}
