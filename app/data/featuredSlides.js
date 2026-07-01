@@ -292,45 +292,45 @@ export const bwFeaturedSlides = [
   {
     id: 'bn-slide-1',
     images: [
-      '/media/bn/BN-01.jpg',
+      '/media/BN/BN-01.jpg',
     ],
   },
   {
     id: 'bn-slide-2',
     images: [
-      '/media/bn/BN-03.jpg',
+      '/media/BN/BN-03.jpg',
     ],
   },
   {
     id: 'bn-slide-3',
     images: [
-      '/media/bn/BN-05.jpg',
-    ],
-  },
-  {
-    id: 'bn-slide-3',
-    images: [
-      '/media/bn/BN-04.jpg',
+      '/media/BN/BN-05.jpg',
     ],
   },
   {
     id: 'bn-slide-4',
     images: [
-      '/media/bn/BN-08.jpg',
+      '/media/BN/BN-04.jpg',
+    ],
+  },
+  {
+    id: 'bn-slide-5',
+    images: [
+      '/media/BN/BN-08.jpg',
     ],
   },
   
   {
-    id: 'bn-slide-5',
+    id: 'bn-slide-6',
     images: [
-      '/media/bn/BN-06.jpg',
-      '/media/bn/BN-07.jpg',
+      '/media/BN/BN-06.jpg',
+      '/media/BN/BN-07.jpg',
     ],
   },
   {
-    id: 'bn-slide-6',
+    id: 'bn-slide-7',
     images: [
-      '/media/bn/BN-02.jpg',
+      '/media/BN/BN-02.jpg',
     ],
   },
 ]
