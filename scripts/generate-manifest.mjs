@@ -26,6 +26,12 @@ const sections = [
     publicPath: '/media/BN',
   },
   {
+    key: 'confiltro',
+    label: 'Con filtros',
+    folder: path.join(mediaDir, 'confiltro'),
+    publicPath: '/media/confiltro',
+  },
+  {
     key: 'videos',
     label: 'Vídeos',
     folder: path.join(mediaDir, 'videos'),

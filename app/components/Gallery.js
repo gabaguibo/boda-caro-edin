@@ -83,6 +83,16 @@ export default function Gallery({ media, featuredSlides, bwFeaturedSlides }) {
     [photosWithIndex]
   )
 
+  const bnPhotos = useMemo(
+    () => photosWithIndex.filter((item) => item.src.includes('/BN/') || item.src.includes('/bn/')),
+    [photosWithIndex]
+  )
+
+  const confiltroPhotos = useMemo(
+    () => photosWithIndex.filter((item) => item.src.includes('/confiltro/')),
+    [photosWithIndex]
+  )
+
   const mainSlides = useMemo(() => {
     if (featuredSlides?.length) return featuredSlides
 
@@ -196,6 +206,78 @@ export default function Gallery({ media, featuredSlides, bwFeaturedSlides }) {
 
           <div className="thumbnailGrid">
             {banquetePhotos.map((item) => (
+              <figure className="thumbnailCard" key={item.id}>
+                <button
+                  className="mediaButton"
+                  onClick={() => openLightbox(item.lightboxIndex)}
+                  aria-label={`Abrir ${item.alt}`}
+                  type="button"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="thumb"
+                  />
+                </button>
+
+                <figcaption>
+                  <button
+                    onClick={() => openLightbox(item.lightboxIndex)}
+                    type="button"
+                  >
+                    Ver
+                  </button>
+                  <a href={item.src} download>
+                    Descargar
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <div className="thumbnailGroup">
+          <h2>Blanco y negro</h2>
+
+          <div className="thumbnailGrid">
+            {bnPhotos.map((item) => (
+              <figure className="thumbnailCard" key={item.id}>
+                <button
+                  className="mediaButton"
+                  onClick={() => openLightbox(item.lightboxIndex)}
+                  aria-label={`Abrir ${item.alt}`}
+                  type="button"
+                >
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="thumb"
+                  />
+                </button>
+
+                <figcaption>
+                  <button
+                    onClick={() => openLightbox(item.lightboxIndex)}
+                    type="button"
+                  >
+                    Ver
+                  </button>
+                  <a href={item.src} download>
+                    Descargar
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <div className="thumbnailGroup">
+          <h2>Con filtros</h2>
+
+          <div className="thumbnailGrid">
+            {confiltroPhotos.map((item) => (
               <figure className="thumbnailCard" key={item.id}>
                 <button
                   className="mediaButton"

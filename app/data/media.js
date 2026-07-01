@@ -722,5 +722,180 @@ export const media = [
     "section": "banquete",
     "src": "/media/banquete/banquete-080.jpg",
     "alt": "Banquete 90"
+  },
+  {
+    "id": "bn-001",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-01-01.jpg",
+    "alt": "Blanco y negro 1"
+  },
+  {
+    "id": "bn-002",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-01-02.jpg",
+    "alt": "Blanco y negro 2"
+  },
+  {
+    "id": "bn-003",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-01-03.jpg",
+    "alt": "Blanco y negro 3"
+  },
+  {
+    "id": "bn-004",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-01-04.jpg",
+    "alt": "Blanco y negro 4"
+  },
+  {
+    "id": "bn-005",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-01.jpg",
+    "alt": "Blanco y negro 5"
+  },
+  {
+    "id": "bn-006",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-02.jpg",
+    "alt": "Blanco y negro 6"
+  },
+  {
+    "id": "bn-007",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-03.jpg",
+    "alt": "Blanco y negro 7"
+  },
+  {
+    "id": "bn-008",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-04.jpg",
+    "alt": "Blanco y negro 8"
+  },
+  {
+    "id": "bn-009",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-05.jpg",
+    "alt": "Blanco y negro 9"
+  },
+  {
+    "id": "bn-010",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-06.jpg",
+    "alt": "Blanco y negro 10"
+  },
+  {
+    "id": "bn-011",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-07.jpg",
+    "alt": "Blanco y negro 11"
+  },
+  {
+    "id": "bn-012",
+    "type": "photo",
+    "section": "bn",
+    "src": "/media/BN/BN-08.jpg",
+    "alt": "Blanco y negro 12"
+  },
+  {
+    "id": "confiltro-001",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/ayto-001.jpg",
+    "alt": "Con filtros 1"
+  },
+  {
+    "id": "confiltro-002",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/ayto-006.jpg",
+    "alt": "Con filtros 2"
+  },
+  {
+    "id": "confiltro-003",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/ayto-012.jpg",
+    "alt": "Con filtros 3"
+  },
+  {
+    "id": "confiltro-004",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-019.jpg",
+    "alt": "Con filtros 4"
+  },
+  {
+    "id": "confiltro-005",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-022.jpg",
+    "alt": "Con filtros 5"
+  },
+  {
+    "id": "confiltro-006",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-023.jpg",
+    "alt": "Con filtros 6"
+  },
+  {
+    "id": "confiltro-007",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-038.jpg",
+    "alt": "Con filtros 7"
+  },
+  {
+    "id": "confiltro-008",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-048.jpg",
+    "alt": "Con filtros 8"
+  },
+  {
+    "id": "confiltro-009",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-052.jpg",
+    "alt": "Con filtros 9"
+  },
+  {
+    "id": "confiltro-010",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-054.jpg",
+    "alt": "Con filtros 10"
+  },
+  {
+    "id": "confiltro-011",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-056.jpg",
+    "alt": "Con filtros 11"
+  },
+  {
+    "id": "confiltro-012",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-075b.jpg",
+    "alt": "Con filtros 12"
+  },
+  {
+    "id": "confiltro-013",
+    "type": "photo",
+    "section": "confiltro",
+    "src": "/media/confiltro/banquete-080.jpg",
+    "alt": "Con filtros 13"
   }
 ]
